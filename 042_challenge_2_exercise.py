@@ -57,7 +57,8 @@ def print_board(board):
   return grid
 
 def make_move(board, row, column, player):
-  board[row][column] = player
+  if board[row][column] == ".":
+    board[row][column] = player
   return board
 
 
@@ -98,6 +99,11 @@ groups_to_check = [
 ]
 
 def is_game_over(board):
+  
+  # runts through the board if no item is "." then the board is full and the game ends
+  if all(item != "." for row in board for item in row):
+    return True
+  
   # We go through our groups
   for group in groups_to_check:
     # If any of them are empty, they're clearly not a
